@@ -35,7 +35,7 @@ const Login = () => {
     return (
         <div className="form-usuario">
             <div className="contenedor-form sombra-dark">
-                <h1>Welcome to MAKEit!<span>Real!</span></h1>
+                <h1>Welcome to MAKEit!<span>Real</span></h1>
 
 
                 <form
@@ -47,7 +47,7 @@ const Login = () => {
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Write your name"
+                        placeholder="Write your email"
                         value={email}
                         onChange={onChange}
                         />
@@ -59,7 +59,7 @@ const Login = () => {
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Choose a password"
+                        placeholder="Write password"
                         value={password}
                         onChange={onChange}
                         />
