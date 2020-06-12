@@ -24,7 +24,14 @@ const ListadoTareas = () => {
                     />
                 ))
             }
+
+            <button
+            type="button"
+            className="btn btn-eliminar0"
+        >Delete Idea &times;</button>
         </ul>
+
+
         </Fragment>
      );
 }
