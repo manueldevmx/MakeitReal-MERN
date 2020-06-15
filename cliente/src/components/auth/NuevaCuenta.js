@@ -59,7 +59,7 @@ const NuevaCuenta = () => {
                     </div>
 
                     <div className="campo-form">
-                        <label htmlFor="email">Password</label>
+                        <label htmlFor="email">Email</label>
                         <input
                         type="email"
                         id="email"

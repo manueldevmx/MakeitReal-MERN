@@ -62,11 +62,11 @@ const NuevoProyecto = () => {
 
     return ( 
         <Fragment>
-            <buttom
+            <button
                 type="button"
                 className="btn btn-block btn-primario"
                 onClick={onClickFormulario}
-            >I wish</buttom>
+            >I wish</button>
 
             {
                 formulario
