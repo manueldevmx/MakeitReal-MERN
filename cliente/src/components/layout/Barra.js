@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Barra = () => {
     return ( 
@@ -6,7 +6,7 @@ const Barra = () => {
             <p className="nombre-usuario"><span>Manuel</span></p>
 
             <nav className="nav-principal">
-                <a href="#">Log out</a>
+                <a href="">Log out</a>
             </nav>
         </header>
 
