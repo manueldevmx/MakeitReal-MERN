@@ -13,7 +13,7 @@ export default (state, action) => {
             return{
                 ...state,
                 tareas: [...state.tareas, action.payload], 
-                errotarea: false
+                errortarea: false
             }
 
             case VALIDAR_TAREA: 
