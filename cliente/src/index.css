@@ -1,9 +1,9 @@
 :root {
     --blanco: #ffffff;
     --gris1: #edf2f6;
-    --gris2: #2f3848;
-    --gris3: #1a202d;
-    --negro: #000000;
+    --gris2: #000000;
+    --gris3: #3d3d3d;
+    --negro: rgb(255, 255, 255);
     --headingFont: 'Raleway', sans-serif;
     --textFont: 'Roboto', sans-serif;
 }
@@ -81,10 +81,11 @@ a {
 .btn-primario {
     background-color: var(--gris2);
     color: var(--blanco);
+    border-color: greenyellow;
 }
 
 .btn-primario:hover {
-    background: var(--gris3);
+    background: greenyellow;
 }
 
 .btn-secundario {
@@ -155,6 +156,7 @@ aside {
     color: var(--gris2);
     line-height: 1.5;
     font-weight: 300;
+    border: lawngreen;
 }
 
 .app-header {
@@ -303,7 +305,7 @@ aside {
 .error {
     max-width: 600px;
     margin: 2rem auto 0 auto;
-    background-color: rgb(170, 0, 0);
+    background-color: greenyellow;
     color: var(--blanco);
 }
 
