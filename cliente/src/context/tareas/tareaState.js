@@ -60,7 +60,7 @@ import {TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMINAR_TAREA, ESTADO_TA
      }
 
      //Cambia el estado de las task
-     const cambiarEstado = tarea => {
+     const cambiarEstadoTarea = tarea => {
           dispatch({
               type: ESTADO_TAREA,
               payload: tarea
@@ -77,7 +77,7 @@ import {TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA, ELIMINAR_TAREA, ESTADO_TA
                 agregarTarea,
                 validarTarea,
                 eliminarTarea,
-                cambiarEstado
+                cambiarEstadoTarea
             }}
           >
               {props.children}

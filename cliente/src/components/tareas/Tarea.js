@@ -12,7 +12,7 @@ const Tarea = ({tarea}) => {
 
         //Obtener la funcion del context de tarea
         const tareasContext = useContext(tareaContext);
-        const { eliminarTarea, obtenerTareas, cambiarEstado } = tareasContext;
+        const { eliminarTarea, obtenerTareas, cambiarEstadoTarea } = tareasContext;
 
         //Extraer el proyecto
         const [proyectoActual] = proyecto;
@@ -30,7 +30,7 @@ const Tarea = ({tarea}) => {
             }else {
                 tarea.estado = true 
             }
-            cambiarEstado(tarea);
+            cambiarEstadoTarea(tarea);
 
            
 
@@ -58,7 +58,6 @@ const Tarea = ({tarea}) => {
                     <button
                          type="button"
                          className="incompleto"
-                    
                          onClick={()=> cambiarEstado(tarea)}
                      >
                         Incompleted  
