@@ -27,7 +27,7 @@ router.put('/:id',
     auth, [
         check('nombre', 'You need a name for the project').not().isEmpty()
     ],
-    proyectoController.actualizarProyecto
-)
+    proyectoController.actualizaProyecto
+);
 
 module.exports = router;
