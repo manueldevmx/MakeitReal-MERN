@@ -71,7 +71,7 @@ exports.actualizaProyecto = async(req, res) => {
 
         //si el proyecto existe o no
         if (!proyecto) {
-            return res.status(400).json({ msg: 'Proyecto no encontrado' })
+            return res.status(400).json({ msg: 'Proyect not found' })
         }
 
 
@@ -92,4 +92,33 @@ exports.actualizaProyecto = async(req, res) => {
         console.log(error);
         res.status(500).send('Server Error Hacking')
     }
+}
+
+//Eliminar un proyecto por su Id
+exports.eliminarProyecto = async(req, res) => {
+    try {
+        //revisar ID
+        let proyecto = await Proyecto.findById(req.params.id);
+
+        //si el proyecto existe o no
+        if (!proyecto) {
+            return res.status(400).json({ msg: 'Proyect not found' })
+        }
+
+
+        //verificar el creador del proyecto
+        if (proyecto.creador.toString() !== req.usuario.id) {
+            return res.status(401).json({ msg: 'No Access' });
+        }
+
+        //Eliminar proyecto
+        await Proyecto.findOneAndRemove({ _id: req.params.id });
+        res.json({ msg: 'Project removed' })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Server error')
+
+    }
+
 }
