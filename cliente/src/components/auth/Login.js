@@ -35,14 +35,14 @@ const Login = () => {
     return (
         <div className="form-usuario">
             <div className="contenedor-form sombra-dark">
-                <h1>Welcome to MAKEit!<span>Real</span></h1>
+                <h1>Welcome to MAKEit!<span> Real</span></h1>
 
 
                 <form
                     onSubmit={onSubmit}
                 >
                     <div className="campo-form">
-                        <label htmlFor="email">Email.</label>
+                        <label htmlFor="email">Email</label>
                         <input
                         type="email"
                         id="email"

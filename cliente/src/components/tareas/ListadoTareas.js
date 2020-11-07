@@ -54,7 +54,7 @@ const ListadoTareas = () => {
 
             <button
             type="button"
-            className="btn btn-eliminar0"
+            className="btn btn-eliminar"
             onClick={onClickEliminar}
         >Delete Idea &times;</button>
         </ul>

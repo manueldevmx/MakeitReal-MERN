@@ -6,7 +6,7 @@ import alertaContext from '../../context/alertas/alertaContext';
 const NuevaCuenta = () => {
 
     //Extraer los valores del context
-    const alertContext = useContext(AlertaContext);
+    const alertaContext = useContext(AlertaContext);
     const { alerta, mostrarAlerta } = alertaContext;
 
     //useState para iniciar sesion
@@ -37,12 +37,21 @@ const NuevaCuenta = () => {
             password.trim() === '' || 
             confirmar.trim() === '') {
                 mostrarAlerta ('Todos los campos son obligatorios', 'alerta-error');
+                return;
             }
 
 
         //Password minimo 6 caracteres
+            if(password.length < 6) {
+                mostrarAlerta('El password debe tener al menos 6 caracteres', 'alerta-error');
+                return;
+            }
 
         //Los 2 passwords diferentes
+        if(password !== confirmar) {
+            mostrarAlerta('Los passwords no son iguales', 'alerta-error');
+            return;
+        }
 
         //Pasarlo al action
     }
@@ -54,7 +63,7 @@ const NuevaCuenta = () => {
         <div className="form-usuario">
             { alerta ? ( <div className={ `alerta ${alerta.categoria}` }> {alerta.msg} </div>) : null }
             <div className="contenedor-form sombra-dark">
-                <h1>Lets Get Started</h1>
+                <h1>Lets Get Started!</h1>
 
 
                 <form
@@ -100,8 +109,8 @@ const NuevaCuenta = () => {
                         <label htmlFor="confirmar">Confirm Password</label>
                         <input
                         type="password"
-                        id="password"
-                        name="password"
+                        id="confirmar"
+                        name="confirmar"
                         placeholder="Please, reapet your password"
                         value={confirmar}
                         onChange={onChange}

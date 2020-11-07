@@ -13,19 +13,20 @@ const AlertaState = props => {
     const [ state, dispatch ] = useReducer(alertaReducer, initialState);
     
     //Funciones
-    const mostrarAlerta = (msg, categoria) => {
+    const mostrarAlerta = (msg, categoria)=> {
         dispatch({
             type: MOSTRAR_ALERTA,
-            payload:{
+            payload: {
                 msg,
                 categoria
             }
         });
 
+        //Despues de 5 seg limpiar la alerta
         setTimeout(() => {
             dispatch({
                 type: OCULTAR_ALERTA
-            })
+            });
         }, 5000);
     }
 
