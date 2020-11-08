@@ -30,7 +30,7 @@ const ListadoTareas = () => {
 
     return ( 
         <Fragment>
-        <h2>Idea:{proyectoActual.nombre}</h2>
+        <h2>Idea:  {proyectoActual.nombre}</h2>
 
         <ul className="listado-tareas">
             {tareasproyecto.length === 0
