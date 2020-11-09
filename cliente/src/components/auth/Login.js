@@ -1,83 +1,107 @@
-import React, { useState }from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import AlertaContext from '../../context/alertas/alertaContext';
+import AuthContext from '../../context/autenticacion/authContext';
 
-const Login = () => {
+const Login = (props) => {
 
-    //State para iniciar sesion
-    const [usuario, guardarUsuario] = useState ({
+    // extraer los valores del context
+    const alertaContext = useContext(AlertaContext);
+    const { alerta, mostrarAlerta } = alertaContext;
+
+    const authContext = useContext(AuthContext);
+    const { mensaje, autenticado, iniciarSesion } = authContext;
+
+      // En caso de que el password o usuario no exista
+      useEffect(() => {
+        if(autenticado) {
+            props.history.push('/proyectos');
+        }
+
+        if(mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+        // eslint-disable-next-line
+    }, [mensaje, autenticado, props.history]);
+
+
+    
+    // State para iniciar sesión
+    const [usuario, guardarUsuario] = useState({
         email: '',
         password: ''
     });
 
-    //extraer de usuario
-    const { email, password } = usuario;  
+    // extraer de usuario
+    const { email, password } = usuario;
 
     const onChange = e => {
-        guardarUsuario ({
+        guardarUsuario({
             ...usuario,
             [e.target.name] : e.target.value
         })
-
     }
-    //Cuando el usuario quiere iniciar sesion//
+
+    // Cuando el usuario quiere iniciar sesión
     const onSubmit = e => {
         e.preventDefault();
 
-        //Validar que no haya campos vacios
+        // Validar que no haya campos vacios
+        if(email.trim() === '' || password.trim() === '') {
+            mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+        }
 
-
-        //Pasarlo al action
+        // Pasarlo al action
+        iniciarSesion({ email, password });
     }
 
 
 
-//Formulario para iniciar sesion//
-    return (
+    return ( 
         <div className="form-usuario">
-            <div className="contenedor-form sombra-dark">
-                <h1>Welcome to MAKEit!<span> Real</span></h1>
+            { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> )  : null }
 
+            <div className="contenedor-form sombra-dark">
+                <h1>Iniciar Sesión</h1>
 
                 <form
                     onSubmit={onSubmit}
                 >
                     <div className="campo-form">
                         <label htmlFor="email">Email</label>
-                        <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Write your email"
-                        value={email}
-                        onChange={onChange}
+                        <input 
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Tu Email"
+                            value={email}
+                            onChange={onChange}
                         />
                     </div>
 
                     <div className="campo-form">
-                        <label htmlFor="email">Password</label>
-                        <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Write password"
-                        value={password}
-                        onChange={onChange}
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Tu Password"
+                            value={password}
+                            onChange={onChange}
                         />
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block"
-                         value="Login"/>       
+                        <input type="submit" className="btn btn-primario btn-block" value="Iniciar Sesión" />
                     </div>
                 </form>
 
-
                 <Link to={'/nueva-cuenta'} className="enlace-cuenta">
-                    Sign Up
+                    Obtener Cuenta
                 </Link>
             </div>
         </div>
-    );
+     );
 }
  
 export default Login;

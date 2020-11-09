@@ -3,6 +3,7 @@ import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 
 import clienteAxios  from '../../config/axios';
+import tokenAuth from '../../config/token';
 
 import { 
     REGISTRO_EXITOSO,
@@ -28,7 +29,7 @@ const registrarUsuario = async datos => {
     try {
 
         const respuesta = await clienteAxios.post('/api/usuarios', datos);
-        console.log(respuesta.data);
+        //console.log(respuesta.data);
 
         dispatch({
             type: REGISTRO_EXITOSO,
@@ -37,14 +38,14 @@ const registrarUsuario = async datos => {
 
         // Obtener el usuario
         usuarioAutenticado();
-        
-    } catch (error) {
-        
-      
-       const alerta = {
-            msg: error.response.data.msg,
+
+
+    } catch (error) {   
+        console.log(error.response.data);
+        const alerta = {
+            msg: error.response,
             categoria: 'alerta-error'
-    }
+        }
 
         dispatch({
             type: REGISTRO_ERROR,
@@ -53,32 +54,63 @@ const registrarUsuario = async datos => {
     }
 }
 
-//Retorna el usuario autenticado
-const usuarioAutenticado = async () => {
-    const token = localStorage.getItem('token');
+    // Retorna el usuario autenticado
+    const usuarioAutenticado = async () => {
+        const token = localStorage.getItem('token');
+        if(token) {
+            tokenAuth(token);
+        }
 
-if (token) {
+        try {
+            const respuesta = await clienteAxios.get('/api/auth');
+            //console.log(respuesta);
+            dispatch({
+                type: OBTENER_USUARIO,
+                payload: respuesta.data.usuario
+            });
 
-}
-
-try {
-    const respuesta = await clienteAxios.get('/api/auth');
-    // console.log(respuesta);
-    dispatch({
-        type: OBTENER_USUARIO,
-        payload: respuesta.data.usuario
-    });
-
-} catch (error) {
-    console.log(error.response);
-    dispatch({
-        type: LOGIN_ERROR
-        })
-        
+        } catch (error) {
+//            console.log(error.response.data);
+            dispatch({
+                type: LOGIN_ERROR
+            })
+        }
     }
 
-}
+    // Cuando el usuario inicia sesión
+    const iniciarSesion = async datos => {
+        try {
+            const respuesta = await clienteAxios.post('/api/auth', datos);
+            
+            dispatch({
+                type: LOGIN_EXITOSO,
+                payload: respuesta.data
+            });
 
+
+    usuarioAutenticado();
+
+        } catch (error) {
+            //console.log(error.response.data.msg);
+
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: alerta
+            })
+        }
+    }
+
+    //Cierra la sesion del usuario
+    const cerrarSesion = () => {
+        dispatch({
+            type: CERRAR_SESION
+        })
+    }
 
 
     return (
@@ -89,7 +121,10 @@ try {
                 usuario: state.usuario,
                 mensaje: state.mensaje,
                 cargando: state.cargando,
-                registrarUsuario
+                registrarUsuario,
+                iniciarSesion,
+                usuarioAutenticado,
+                cerrarSesion
             }}
         
         >{props.children}
