@@ -12,7 +12,7 @@
     "react-clear-cache": "^1.2.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^4.0.0",
     "react-transition-group": "^1.2.1",
     "typescript": "^3.9.5"
   },
@@ -37,7 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "uuid": "^8.1.0"
-  }
+  "devDependencies": {}
 }

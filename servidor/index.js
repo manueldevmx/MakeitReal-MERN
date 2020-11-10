@@ -2,30 +2,28 @@ const express = require('express');
 const conectarDB = require('./config/db');
 const cors = require('cors');
 
-//Crear el servidor
+// crear el servidor
 const app = express();
 
-//Conectar a la base de datoss
+// Conectar a la base de datos
 conectarDB();
 
-//Habilitar Cors
+// habilitar cors
 app.use(cors());
 
-//Habilitar express.json
-app.use(express.json({ extended: true }));
+// Habilitar express.json
+app.use( express.json({ extended: true }));
 
-//PUERTO DE LA APP
-const PORT = process.env.PORT || 4000;
+// puerto de la app
+const port = process.env.PORT || 4000;
 
-//importar rutas
+// Importar rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/proyectos', require('./routes/proyectos'));
 app.use('/api/tareas', require('./routes/tareas'));
 
-
-
-//run app
-app.listen(PORT, () => {
-    console.log(`SERVER ON PORT: ${PORT}`);
+// arrancar la app
+app.listen(port, '0.0.0.0', () => {
+    console.log(`El servidor esta funcionando en el puerto ${port}`);
 });

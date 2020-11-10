@@ -58,6 +58,6 @@ exports.usuarioAutenticado = async(req, res) => {
         res.json({ usuario });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ msg: 'Hubo un error' });
+        res.status(500).json({ msg: 'Hubo un e' });
     }
 }
